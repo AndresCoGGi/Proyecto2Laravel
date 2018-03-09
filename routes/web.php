@@ -15,26 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/usuarios',function(){
-   return 'usuarios';
-});
+Route::get('/usuarios','UserControlller@index');
 
 //usuarios/nuevo no coincide coincide con id
-Route::get('usuarios/{id}',function($id){
-    return "mostrando detalle del usuario: $id";
-})->where('id','[0-9]+');//para validar que la ruta sea con un numero
+Route::get('usuarios/{id}','UserControlller@show')->where('id','[0-9]+');//para validar que la ruta sea con un numero
 
-Route::get('usuarios/nuevo',function(){
-      return 'crear nuevo usuario';
-
-});
+Route::get('usuarios/nuevo','UserControlller@create');
 //laravel toma la primera ruta que el encuentre /usuarios/'?????'
 
-Route::get('/saludo/{name}/{nickname}',function($name,$nickname=null){
-   if($nickname){
-       return "bienvenido {$name}, tu apodo es {$nickname}";
-   }else{
-       return "bienvenido {$name}, no tienes apodo";
-   }
-   
-});
+Route::get('/saludo/{name}/{nickname}','WelcomeUserController@index');
